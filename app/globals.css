@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0e0c0a;
+  --foreground: #faf7f2;
+  --primary: #c9a96e;
+  --primary-light: #e8d5a3;
+  --muted: #1a1714;
+  --muted-foreground: rgba(255, 255, 255, 0.45);
+  --card: #14120f;
+  --border: rgba(201, 169, 110, 0.25);
+  --radius: 0rem;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--background);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Cinematic vignette */
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      ellipse at 50% 50%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.65) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      transparent 30%,
+      transparent 60%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Corner decoration */
+.corner-decoration {
+  position: fixed;
+  z-index: 40;
+  pointer-events: none;
+  width: 40px;
+  height: 40px;
+}
+
+.corner-tl {
+  top: 32px;
+  left: 32px;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.corner-tr {
+  top: 32px;
+  right: 32px;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.corner-bl {
+  bottom: 32px;
+  left: 32px;
+  border-bottom: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.corner-br {
+  bottom: 32px;
+  right: 32px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
